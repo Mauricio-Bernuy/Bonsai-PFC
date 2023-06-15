@@ -1,0 +1,4 @@
+/home/home-server/repos/Bonsai/runtime/CMakeFiles/bonsai2_slowdust.dir
+/home/home-server/repos/Bonsai/runtime/CMakeFiles/bonsai_amuse.dir
+/home/home-server/repos/Bonsai/runtime/CMakeFiles/edit_cache.dir
+/home/home-server/repos/Bonsai/runtime/CMakeFiles/rebuild_cache.dir

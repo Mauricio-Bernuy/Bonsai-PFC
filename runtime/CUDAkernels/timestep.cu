@@ -25,6 +25,7 @@ static __device__ __forceinline__ void get_TnextD(const int n_bodies,
   sdata[tid] = 1.0e10f;
   float tmin = 1.0e10f;
 
+  // we reduce multiple elements 
   // we reduce multiple elements per thread.  The number is determined by the
   // number of active thread blocks (via gridSize).  More blocks will result
   // in a larger gridSize and therefore fewer elements per thread

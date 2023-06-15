@@ -118,6 +118,7 @@ void octree::sort_bodies(tree_structure &tree, bool doDomainUpdate, bool doFullS
 
   //We assume the bodies are already on the GPU
   devContext->startTiming(execStream->s());
+  fprintf(stderr, "test test!");
   real4 r_min = {+1e10, +1e10, +1e10, +1e10}; 
   real4 r_max = {-1e10, -1e10, -1e10, -1e10};   
   
@@ -180,6 +181,7 @@ void octree::sort_bodies(tree_structure &tree, bool doDomainUpdate, bool doFullS
 
   // If srcValues and buffer are different, then the original values
   // are preserved, if they are the same srcValues will be overwritten
+
   if(tree.n > 0) gpuSort(srcValues, tree.oriParticleOrder, tempB, tempC, tempD, tempE, tree.n);
   dataReorder(tree.n, tree.oriParticleOrder, srcValues, tree.bodies_key, true, true);
 
@@ -196,12 +198,17 @@ void octree::sort_bodies(tree_structure &tree, bool doDomainUpdate, bool doFullS
 
 
   devContext->stopTiming("Sorting", 0, execStream->s());
-
+  printf("separator\n");
   //Call the reorder data functions
   devContext->startTiming(execStream->s());
 
   //JB this if statement is required until I fix the order
   //of functions in main.cpp  
+  for (int i= 0; i < 10; i++)
+  {
+    printf("a: %d, %f | %d, %d\n", tree.bodies_ids[i],tree.bodies_pos[i],doDomainUpdate, doFullShuffle);
+  }
+
 
   if(!doFullShuffle)
   {
@@ -213,8 +220,9 @@ void octree::sort_bodies(tree_structure &tree, bool doDomainUpdate, bool doFullS
     ullBuffer.   cmalloc_copy(tree.generalBuffer1, tree.n, 0);
     realBuffer.  cmalloc_copy(tree.generalBuffer1, tree.n, 0);
 
-    dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_Ppos, real4Buffer1, true, true);
-    dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_ids,  ullBuffer,    true, true);
+  
+
+    dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_ids,  ullBuffer,    true, true);          // HMMM
     dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_h,    realBuffer,   true, true);          //Density values
   }
   else
@@ -240,13 +248,21 @@ void octree::sort_bodies(tree_structure &tree, bool doDomainUpdate, bool doFullS
     dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_Ppos, real4Buffer1);
     dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_Pvel, real4Buffer1);
     dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_time, float2Buffer);
+    for (int i= 65000-10; i < 65000; i++)
+    {
+      printf("b: %d, %f\n", tree.bodies_ids[i],tree.bodies_pos[i]);
+    }
     dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_ids, ullBuffer);
-
+    for (int i= 0; i < 10; i++)
+    {
+      printf("c: %d, %f\n", tree.bodies_ids[i],tree.bodies_pos[i]);
+    }
     //Density values
     dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_h, realBuffer);
 
   } //end if
   
+  LOG("BEFORE DATA REORDER STEP\n", tree.n);
   devContext->stopTiming("Data-reordering", 1, execStream->s());
 
 //  exit(0);

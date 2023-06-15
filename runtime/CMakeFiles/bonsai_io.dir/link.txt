@@ -1,0 +1,1 @@
+/usr/bin/mpicxx  -fopenmp -rdynamic CMakeFiles/bonsai_io.dir/src/bonsai_io.cpp.o CMakeFiles/bonsai_io.dir/src/anyoption.cpp.o -o bonsai_io  -lrt -pie -rdynamic 

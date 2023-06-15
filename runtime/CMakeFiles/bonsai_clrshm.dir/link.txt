@@ -1,0 +1,1 @@
+/usr/bin/mpicxx  -fopenmp -rdynamic CMakeFiles/bonsai_clrshm.dir/src/bonsai_clrshm.cpp.o -o bonsai_clrshm  -lrt -pie -rdynamic 

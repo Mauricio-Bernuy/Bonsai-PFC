@@ -1,0 +1,1 @@
+/usr/bin/mpicxx  -fopenmp -rdynamic CMakeFiles/bonsai_driver.dir/src/driver.cpp.o -o bonsai_driver  -ldl -lrt -pie -rdynamic 

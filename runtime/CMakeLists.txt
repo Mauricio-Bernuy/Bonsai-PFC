@@ -2,6 +2,8 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
+set(OpenGL_GL_PREFERENCE GLVND)
+
 option(CUDA_VERBOSE_PTXAS
   "On to enable verbose output from the PTXAS assembler."
   OFF
@@ -65,7 +67,7 @@ option(CUDA_KEEP_INTERMEDIATE_FILES
 
 FIND_PACKAGE(CUDA REQUIRED)
 
-add_definitions(-std=c++11)
+add_definitions(-std=c++14)
 set(EXTRA_MPI_LINK_FLAGS)
 if (USE_MPI)
   add_definitions(-DUSE_MPI)
@@ -309,7 +311,7 @@ cuda_add_executable(${BINARY_NAME}
   ${HFILES}
   ${CUFILES}
   ${PROFFILES}
-  OPTIONS ${GENCODE} ${VERBOSE_PTXAS} ${DEVICE_DEBUGGING} ${KEEP} -Xcompiler="-fPIE" -std=c++11 
+  OPTIONS ${GENCODE} ${VERBOSE_PTXAS} ${DEVICE_DEBUGGING} ${KEEP} -Xcompiler="-fPIE" -std=c++14 
   )
 
 
@@ -321,7 +323,7 @@ cuda_add_library(bonsai_amuse
   ${HFILES}                                                                                         
   ${CUFILES}                                                                                        
   ${PROFFILES}                                                                                      
-  OPTIONS ${GENCODE} ${VERBOSE_PTXAS} ${DEVICE_DEBUGGING} ${KEEP} -Xcompiler="-fPIE" -std=c++11        
+  OPTIONS ${GENCODE} ${VERBOSE_PTXAS} ${DEVICE_DEBUGGING} ${KEEP} -Xcompiler="-fPIE" -std=c++14        
   )                                                                                                 
                 
 
