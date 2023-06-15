@@ -104,8 +104,8 @@ private:
         Real mass;
         Real pos[MAXDIM];
         Real vel[MAXDIM];
-      private:
         int _ID[2]; //replaces phi and eps
+      // private:
       public:
         unsigned long long getID() const {return *(unsigned long long*)_ID;}
         void setID(unsigned  long long ID) { *(unsigned long long*)_ID = ID; }
@@ -118,11 +118,11 @@ private:
         Real vel[MAXDIM];
         Real metals ;
         Real tform ;
-    private:
-      int _ID[2]; //replaces phi and eps
+        int _ID[2]; //replaces phi and eps
+    // private:
     public:
-      unsigned long long  getID() const {return *(unsigned  long long*)_ID;}
-      void setID(unsigned long long ID) { *(unsigned  long long*)_ID = ID; }
+      unsigned long long getID() const {return *(unsigned long long*)_ID;}
+      void setID(unsigned long long ID) { *(unsigned long long*)_ID = ID; }
       int getID_V1() const {return _ID[1];}
     //    Real eps;
     //    int ID; //replaces phi and eps

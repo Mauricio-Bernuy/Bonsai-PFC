@@ -69,10 +69,23 @@ void tipsyIO::writeFile(real4 *bodyPositions, real4 *bodyVelocities, ullong* bod
     std::vector<real4>   allVelocities;
     std::vector<ullong>  allIds;
 
+    // printf("IN FILEIO WRITEFILE\n");
+    // for (int i= 0; i < 10; i++)
+    // {
+    //   printf("ids: %d\n", bodyIds[i]);
+    // }
+
     allPositions. insert(allPositions.begin(),  &bodyPositions[0],  &bodyPositions[n]);
     allVelocities.insert(allVelocities.begin(), &bodyVelocities[0], &bodyVelocities[n]);
     allIds.       insert(allIds.begin(),        &bodyIds[0],        &bodyIds[n]);
 
+    // printf("after insert to allIds vector\n");
+    // for (int i= 0; i < 10; i++)
+    // {
+    //   printf("ids: %d\n", allIds[i]);
+    // }
+
+    // printf("perprocess: %d\n", perProcess);
     if(!perProcess)
     {
         //Now receive the data from the other processes
@@ -107,6 +120,7 @@ void tipsyIO::writeFile(real4 *bodyPositions, real4 *bodyVelocities, ullong* bod
     h.nsph    = 0;
     h.version = 2;
     outputFile.write((char*)&h, sizeof(h));
+    // printf("wrote header\n");
 
     //First write the dark matter particles
     for(int i=0; i < allIds.size(); i++)
@@ -145,6 +159,7 @@ void tipsyIO::writeFile(real4 *bodyPositions, real4 *bodyVelocities, ullong* bod
         s.setID(allIds[i]);
         s.metals = 0;
         s.tform = 0;
+        // printf("star write: %s\n",(char*)&s);
         outputFile.write((char*)&s, sizeof(s));
      } //end if
     } //end i loop

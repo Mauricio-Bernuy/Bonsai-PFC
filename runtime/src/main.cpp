@@ -878,7 +878,11 @@ int main(int argc, char** argv, MPI_Comm comm, int shrMemPID)
 //              distributed = false;
 //              sprintf(&fileName[0], "%s_%010.4f", snapshotFile.c_str(), t_current);
           }
-
+          // printf("JUST BEFORE WRITE");
+          // for (int i= 0; i < 10; i++)
+          // {
+          //   printf("ids: %d", ioSharedData.IDs[i]);
+          // }
           tree->fileIO->writeFile(ioSharedData.Pos, ioSharedData.Vel,
                                   ioSharedData.IDs, ioSharedData.nBodies,
                                   fileName.c_str(), t_current,

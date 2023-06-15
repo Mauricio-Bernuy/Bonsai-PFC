@@ -107,7 +107,7 @@ void octree::iterate_setup() {
   // {
   //   printf("c: %d, %f\n", localTree.bodies_ids[i],localTree.bodies_pos[i]);
   // }
-  printf("sortbodies from iterate_setup\n");
+  // printf("sortbodies from iterate_setup\n");
   sort_bodies(localTree, true, true); //Initial sort to get global boundaries to compute keys
   
   LOGF(stderr, "FINISHED SORT BODIES NO MPI!\n");
