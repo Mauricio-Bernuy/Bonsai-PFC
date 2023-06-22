@@ -15,3 +15,6 @@
 
 #Temporary editor files
 *~
+runtime/data/
+build/
+data/
