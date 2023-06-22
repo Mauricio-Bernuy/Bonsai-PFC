@@ -488,13 +488,26 @@ void octree::predict(tree_structure &tree)
     }
     else
     {
-      //Reduce the last parts on the host
-      tnext.d2h();
-      t_previous = t_current;
-      t_current  = tnext[0];
-      for (int i = 1; i < NBLOCK_REDUCE ; i++)
+      if (getUseDirectGravity())
       {
-          t_current = std::min(t_current, tnext[i]);
+        if (t_previous == -1){
+          t_previous  =  0;
+        }
+        else{
+          t_previous  =  t_current;
+          t_current  += timeStep;
+        }
+      }
+      else
+      {
+        //Reduce the last parts on the host
+        tnext.d2h();
+        t_previous = t_current;
+        t_current  = tnext[0];
+        for (int i = 1; i < NBLOCK_REDUCE ; i++)
+        {
+            t_current = std::min(t_current, tnext[i]);
+        }
       }
     }
   #else
