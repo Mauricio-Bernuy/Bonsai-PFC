@@ -219,8 +219,9 @@ void octree::sort_bodies(tree_structure &tree, bool doDomainUpdate, bool doFullS
     ullBuffer.   cmalloc_copy(tree.generalBuffer1, tree.n, 0);
     realBuffer.  cmalloc_copy(tree.generalBuffer1, tree.n, 0);
 
-    dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_ids,  ullBuffer,    true, true);          // HMMM
-    dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_h,    realBuffer,   true, true);          //Density values
+    dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_Ppos, real4Buffer1, true, true);
+    dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_ids,  ullBuffer,    true, true);
+    dataReorder(tree.n, tree.oriParticleOrder, tree.bodies_h,    realBuffer,   true, true);      
   }
   else
   {
