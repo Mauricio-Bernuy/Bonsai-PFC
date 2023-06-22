@@ -68,6 +68,7 @@ void octree::iterate_setup() {
       if(gravStream == NULL)          gravStream          = new my_dev::dev_stream(0);
       if(copyStream == NULL)          copyStream          = new my_dev::dev_stream(0);
       if(LETDataToHostStream == NULL) LETDataToHostStream = new my_dev::dev_stream(0);
+
       CU_SAFE_CALL(cudaEventCreate(&startLocalGrav));
       CU_SAFE_CALL(cudaEventCreate(&endLocalGrav));
       CU_SAFE_CALL(cudaEventCreate(&startRemoteGrav));
@@ -83,9 +84,8 @@ void octree::iterate_setup() {
       for(int i=0; i < 5; i++)
       {
         double notUsed     = 0;
-        int maxN = 0, minN = 0;z
+        int maxN = 0, minN = 0;
         sort_bodies(localTree, true, true); //Initial sort to get global boundaries to compute keys
-        LOGF(stderr, "FINISHED SORT BODIES!");
         parallelDataSummary(localTree, 30, 30, notUsed, notUsed, true); //1 for all process, equal part distribution
 
         //Check if the min/max are within certain percentage
@@ -103,29 +103,19 @@ void octree::iterate_setup() {
       }
     }
   #endif
-  // for (int i= 0; i < 10; i++)
-  // {
-  //   printf("c: %d, %f\n", localTree.bodies_ids[i],localTree.bodies_pos[i]);
-  // }
-  // printf("sortbodies from iterate_setup\n");
+
   sort_bodies(localTree, true, true); //Initial sort to get global boundaries to compute keys
-  
-  LOGF(stderr, "FINISHED SORT BODIES NO MPI!\n");
   letRunning      = false;
 }
 
 // returns true if this iteration is the last (t_current >= t_end), false otherwise
 bool octree::iterate_once(IterationData &idata) {
-    LOGF(stderr, "a1\n");
-
     double t1 = 0;
 
-    LOGF(stderr, "a2\n");
     //if(t_current < 1) //Clear startup timings
     //if(0)
     if(iter < 32)
     {
-      LOGF(stderr, "a3\n");
       idata.totalGPUGravTimeLocal = 0;
       idata.totalGPUGravTimeLET   = 0;
       idata.totalLETCommTime      = 0;
@@ -188,8 +178,6 @@ bool octree::iterate_once(IterationData &idata) {
       devContext->startTiming(gravStream->s());
       direct_gravity(this->localTree);
       devContext->stopTiming("Direct_gravity", 4);
-      LOG("Direct!!\n");
-
     }
     else
     {
@@ -275,12 +263,8 @@ bool octree::iterate_once(IterationData &idata) {
 
     float ms=0, msLET=0;
 #if 1 //enable when load-balancing, gets the accurate GPU time from events
-    LOG("Elapsed time that fails lol\n");
-    CU_SAFE_CALL(cudaSetDevice(0));
-    
     // CU_SAFE_CALL(cudaEventElapsedTime(&ms, startLocalGrav, endLocalGrav));
-
-    if(nProcs > 1)  CU_SAFE_CALL(cudaEventElapsedTime(&msLET,startRemoteGrav, endRemoteGrav));
+    // if(nProcs > 1)  CU_SAFE_CALL(cudaEventElapsedTime(&msLET,startRemoteGrav, endRemoteGrav));
 
     msLET += runningLETTimeSum;
 
@@ -331,7 +315,7 @@ bool octree::iterate_once(IterationData &idata) {
     
     idata.Nact_since_last_tree_rebuild += this->localTree.n_active_particles;
 
-    // Compute energies
+    //Compute energies
     tTempTime = get_time();
     devContext->startTiming(execStream->s());
     double de = compute_energies(this->localTree);
@@ -340,7 +324,7 @@ bool octree::iterate_once(IterationData &idata) {
 
     if(statisticsIter > 0)
     {
-      if(t_current >= nextStatsTime)
+      if(t_current >= nextStatsTime) // HMM
       {
         nextStatsTime += statisticsIter;
         double tDens0 = get_time();
@@ -348,19 +332,15 @@ bool octree::iterate_once(IterationData &idata) {
         localTree.bodies_vel.d2h();
         localTree.bodies_ids.d2h();
 
-        double tDens1 = get_time();
-
-        LOGF(stderr, "before density\n");
-        // CAUSES SEGFAULT!!!! //
+        // double tDens1 = get_time();
         // const DENSITY dens(mpiCommWorld, procId, nProcs, localTree.n,
         //                    &localTree.bodies_pos[0],
         //                    &localTree.bodies_vel[0],
         //                    &localTree.bodies_ids[0],
         //                    1, 2.33e9, 20, "density", t_current);
-        LOGF(stderr, "after density\n");
 
-        double tDens2 = get_time();
-        if(procId == 0) LOGF(stderr,"Density took: Copy: %lg Create: %lg \n", tDens1-tDens0, tDens2-tDens1);
+        // double tDens2 = get_time();
+        // if(procId == 0) LOGF(stderr,"Density took: Copy: %lg Create: %lg \n", tDens1-tDens0, tDens2-tDens1);
 
         double tDisk1 = get_time();
         const DISKSTATS diskstats(mpiCommWorld, procId, nProcs, localTree.n,
@@ -421,7 +401,7 @@ bool octree::iterate_once(IterationData &idata) {
       return true;
     }
     iter++; 
-     
+
     return false;
 }
 
@@ -450,59 +430,33 @@ void octree::iterate_teardown(IterationData &idata) {
 }
 
 void octree::iterate(bool amuse) {
-  // for (int i= 0; i < 10; i++)
-  // {
-  //   printf("c: %d, %f\n", localTree.bodies_ids[i],localTree.bodies_pos[i]);
-  // }
   IterationData idata;
   if(!amuse) iterate_setup();
   idata.startTime = get_time();
-  // for (int i= 0; i < 10; i++)
-  // {
-  //   printf("d: %d, %f\n", localTree.bodies_ids[i],localTree.bodies_pos[i]);
-  // }
 
-  LOGF(stderr, "BEFORE WHILE LOOP!\n");
-  LOGF(stderr, "amuse = %i\n", amuse);
-  
+
   while(true)
   {
-    // for (int i= 0; i < 10; i++)
-    // {
-    //   printf("e: %d, %f\n", localTree.bodies_ids[i],localTree.bodies_pos[i]);
-    // }
-
-    LOGF(stderr, "entering while loop\n");
-
     bool stopRun = iterate_once(idata);
-    // bool stopRun = 0;
-    LOGF(stderr, "step 1 complete\n");
 
     double totalTime = get_time() - idata.startTime;
-    LOGF(stderr, "step 2 complete\n");
 
     static char textBuff[16384];
-    LOGF(stderr, "step 3 complete\n");
-
     sprintf(textBuff,"TIME [%02d] TOTAL: %g\t Grav: %g (GPUgrav %g , LET Com: %g)\tBuild: %g\tDomain: %g\t Wait: %g\tdomUp: %g\tdomEx: %g\tdomWait: %g\ttPredCor: %g\n",
                       procId, totalTime, idata.totalGravTime,
                       (idata.totalGPUGravTimeLocal+idata.totalGPUGravTimeLET) / 1000,
                       idata.totalLETCommTime,
                       idata.totalBuildTime, idata.totalDomTime, idata.lastWaitTime,
                       idata.totalDomUp, idata.totalDomEx, idata.totalDomWait, idata.totalPredCor);
-    LOGF(stderr, "step 4 complete\n");
-
 
     if (procId == 0)
     {
       LOGF(stderr,"%s", textBuff);
       LOGF(stdout,"%s", textBuff);
     }
-    LOGF(stderr, "step 5 complete\n");
 
     devContext->writeLogEvent(textBuff);
     this->writeLogToFile();     //Write the logdata to file
-    LOGF(stderr, "step 6 complete\n");
 
     if(stopRun) break;
   } //end while

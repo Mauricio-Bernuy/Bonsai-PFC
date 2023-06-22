@@ -797,6 +797,7 @@ int main(int argc, char** argv, MPI_Comm comm, int shrMemPID)
   tree->localTree.bodies_Pvel.h2d();
   tree->localTree.bodies_ids. h2d();
 
+
   #ifdef USE_MPI
     omp_set_num_threads(4); //Startup the OMP threads to be used during LET phase
   #endif
@@ -821,11 +822,6 @@ int main(int argc, char** argv, MPI_Comm comm, int shrMemPID)
   //watcher.detach();
 
 
-  fprintf(stderr, "STARTING UP!!!\n");
-  // for (int i= 0; i < 10; i++)
-  // {
-  //   printf("a: %d, %f\n", tree->localTree.bodies_ids[i],tree->localTree.bodies_pos[i]);
-  // }
 
   /* w/o MPI-IO use async fwrite, so use 2 threads otherwise, use 1 threads
    */
@@ -834,16 +830,10 @@ int main(int argc, char** argv, MPI_Comm comm, int shrMemPID)
     const int tid = omp_get_thread_num();
     if (tid == 0)
     {
-      // for (int i= 0; i < 10; i++)
-      // {
-      //   printf("b: %d, %f\n", tree->localTree.bodies_ids[i],tree->localTree.bodies_pos[i]);
-      // }
-
       //Catch exceptions to add some extra print info
       try
       {
         tree->iterate();
-        
       }
       catch(const std::exception &exc)
       {
@@ -878,11 +868,7 @@ int main(int argc, char** argv, MPI_Comm comm, int shrMemPID)
 //              distributed = false;
 //              sprintf(&fileName[0], "%s_%010.4f", snapshotFile.c_str(), t_current);
           }
-          // printf("JUST BEFORE WRITE");
-          // for (int i= 0; i < 10; i++)
-          // {
-          //   printf("ids: %d", ioSharedData.IDs[i]);
-          // }
+
           tree->fileIO->writeFile(ioSharedData.Pos, ioSharedData.Vel,
                                   ioSharedData.IDs, ioSharedData.nBodies,
                                   fileName.c_str(), t_current,
@@ -921,11 +907,7 @@ int main(int argc, char** argv, MPI_Comm comm, int shrMemPID)
     LOGF(stderr, "Domain:  Time spent in computing new domain decomposition and exchanging particles between nodes.\n");
     LOGF(stderr, "Wait:    Time spent in waiting on other processes after the gravity part.\n");
   }
-  
-   for (int i= 0; i < 10; i++)
-  {
-    printf("final: %d, %f\n", tree->localTree.bodies_ids[i],tree->localTree.bodies_pos[i]);
-  }
+
 
   delete tree;
   tree = NULL;

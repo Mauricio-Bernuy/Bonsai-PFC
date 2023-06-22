@@ -118,7 +118,6 @@ void octree::sort_bodies(tree_structure &tree, bool doDomainUpdate, bool doFullS
 
   //We assume the bodies are already on the GPU
   devContext->startTiming(execStream->s());
-  fprintf(stderr, "test test!");
   real4 r_min = {+1e10, +1e10, +1e10, +1e10}; 
   real4 r_max = {-1e10, -1e10, -1e10, -1e10};   
   

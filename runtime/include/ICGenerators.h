@@ -278,7 +278,7 @@ struct DiskShuffle
       assert(!std::isnan(m.pos[i].y));
       assert(!std::isnan(m.pos[i].z));
       assert(m.mass[i] > 0.0);
-      bodyIDs[i]   = ((unsigned long long) nPlummer)*procId + i; //HERE???
+      bodyIDs[i]   = ((unsigned long long) nPlummer)*procId + i;
 
       bodyPositions[i].x = m.pos[i].x;
       bodyPositions[i].y = m.pos[i].y;
