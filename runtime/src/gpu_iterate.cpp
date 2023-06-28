@@ -405,9 +405,43 @@ bool octree::iterate_once(IterationData &idata) {
     return false;
 }
 
+// 0       Acc: -0.011765 0.020420 0.021722 -0.182382      Px: 2.040144    Vx: -0.076375   kin: -0.076375  pot: 2.040144
+// 1       Acc: -0.000702 0.014151 0.012036 -0.139096      Px: 0.374672    Vx: -0.074643   kin: -0.074643  pot: 0.374672
+// IS REPRODUCIBLE!!!
+void octree::export_accel_vals() {
+  tree_structure &tree = this->localTree;
+  printf("EXPORT LAST ITERATION VALUES!\n");
+  tree.bodies_ids.d2h();
+  tree.bodies_pos.d2h();
+  tree.bodies_vel.d2h();
+  tree.bodies_acc0.d2h();
+  
+  char fileName[64];
+  ofstream accelData;
+  sprintf(fileName, "%s-last-accel-data", snapshotFile.c_str());
+  accelData.open(fileName);
 
+  for (int i = 0; i < tree.n; i++) {
+    float4 vel = tree.bodies_vel[i];
+    if(true) 
+    {
+      accelData << i << " " << tree.bodies_ids[i] << " ";
+      accelData << tree.bodies_acc0[i].x << " ";
+      accelData << tree.bodies_acc0[i].y << " ";
+      accelData << tree.bodies_acc0[i].z << " ";
+      accelData << tree.bodies_acc0[i].w << "\n";
+
+      // printf("%d\tid: %llu\tAcc: %f %f %f %f\tPx: %f\tVx: %f\tkin: %f\tpot: %f\n", 
+      //     i,tree.bodies_ids[i],
+      //     tree.bodies_acc0[i].x, tree.bodies_acc0[i].y, tree.bodies_acc0[i].z,
+      //     tree.bodies_acc0[i].w, tree.bodies_pos[i].x, tree.bodies_vel[i].x);
+    }
+  }
+  accelData.close();
+}
 
 void octree::iterate_teardown(IterationData &idata) {
+
   if(execStream != NULL) {
     delete execStream;
     execStream = NULL;
@@ -461,6 +495,7 @@ void octree::iterate(bool amuse) {
     if(stopRun) break;
   } //end while
   
+  export_accel_vals(); // if exporting accels
   if(!amuse) iterate_teardown(idata);
 } //end iterate
 
@@ -924,6 +959,27 @@ double octree::compute_energies(tree_structure &tree)
     double hEtot = hEpot + hEkin;
     LOG("Energy (on host): Etot = %.10lg Ekin = %.10lg Epot = %.10lg \n", hEtot, hEkin, hEpot);
   #endif
+  // debug test
+  // printf("PRINT CURRENT ITERATION VALUES!\n");
+  // tree.bodies_pos.d2h();
+  // tree.bodies_vel.d2h();
+  // tree.bodies_acc0.d2h();
+  // for (int i = 0; i < tree.n; i++) {
+  //   float4 vel = tree.bodies_vel[i];
+  //   // hEkin += tree.bodies_pos[i].w*0.5*(vel.x*vel.x +
+  //   //                             vel.y*vel.y +
+  //   //                             vel.z*vel.z);
+  //   // hEpot += tree.bodies_pos[i].w*0.5*tree.bodies_acc0[i].w;
+  //   if(i < 128) // print first 128
+  //   // if(i < 0) 
+  //   {
+  //     printf("%d\tAcc: %f %f %f %f\tPx: %f\tVx: %f\tkin: %f\tpot: %f\n", i,
+  //         tree.bodies_acc0[i].x, tree.bodies_acc0[i].y, tree.bodies_acc0[i].z,
+  //         tree.bodies_acc0[i].w, tree.bodies_pos[i].x, tree.bodies_vel[i].x);
+  //   }
+  // }
+
+
 
   //float2 energy: x is kinetic energy, y is potential energy
   int blockSize = NBLOCK_REDUCE ;

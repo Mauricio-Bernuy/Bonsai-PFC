@@ -1,4 +1,12 @@
 {
     "cmake.sourceDirectory": "/home/home-server/repos/Bonsai/runtime",
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "files.associations": {
+        "iosfwd": "cpp",
+        "string": "cpp",
+        "filesystem": "cpp",
+        "stdexcept": "cpp",
+        "ostream": "cpp",
+        "fstream": "cpp"
+    }
 }

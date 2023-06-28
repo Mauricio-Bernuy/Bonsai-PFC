@@ -477,6 +477,9 @@ public:
     void compute_properties_double(tree_structure &tree);
     void setActiveGrpsFunc(tree_structure &tree);
 
+    // my impl
+    void export_accel_vals();
+
 
   struct IterationData {
       IterationData() : Nact_since_last_tree_rebuild(0),
@@ -704,9 +707,12 @@ public:
   void setUseDirectGravity(bool s)  { useDirectGravity = s;    }
   bool getUseDirectGravity() const  { return useDirectGravity; }
 
-  octree(const MPI_Comm &comm,
+  octree(const MPI_Comm &comm, // printf("%d\tid: %llu\tAcc: %f %f %f %f\tPx: %f\tVx: %f\tkin: %f\tpot: %f\n", 
+      //     i,tree.bodies_ids[i],
+      //     tree.bodies_acc0[i].x, tree.bodies_acc0[i].y, tree.bodies_acc0[i].z,
+      //     tree.bodies_acc0[i].w, tree.bodies_pos[i].x, tree.bodies_vel[i].x);
          my_dev::context *devContext_,
-         char **argv, const int device = 0, const float _theta = 0.75, const float eps = 0.05,
+         char **argv, const int device = 0, const float _theta = 0.75, const float eps = 0.05, //IMPORTANT THETA
          string snapF = "", float snapI = -1,  
          const float _quickDump       = 0.0,
          const float _quickRatio      = 0.1,

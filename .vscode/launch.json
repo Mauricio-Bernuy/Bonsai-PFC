@@ -10,9 +10,12 @@
             "request": "launch",
             // Resolved by CMake Tools:
             "program": "${command:cmake.launchTargetPath}",
+            // "args": [
+            //     "--direct",
+            //     "--plummer", "650000", "--snapname", "data/plummer_snap_mpi", 
+            //     "--snapiter", "0.0625", "-T", "0.25", "-dt", "0.0625", "--eps", "0.05"            ],
             "args": [
-                "--direct",
-                "--plummer", "650000", "--snapname", "data/plummer_snap_mpi", 
+                "--plummer", "6500", "--snapname", "data/plummer_snap_mpi", 
                 "--snapiter", "0.0625", "-T", "0.25", "-dt", "0.0625", "--eps", "0.05"            ],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
