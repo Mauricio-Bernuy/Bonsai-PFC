@@ -1,64 +1,39 @@
 PROC-00000 Start execution
-PROC-00000 0	0	Sorting	0.746112
-PROC-00000 1	1	Data-reordering	0.39136
-PROC-00000 2	9	Predict	0.208864
-PROC-00000 3	0	Sorting	0.708608
-PROC-00000 4	1	Data-reordering	0.26928
-PROC-00000 5	2	Tree-construction	0.636928
-PROC-00000 6	11	Memory	0.036864
-PROC-00000 7	3	Compute-properties	0.159744
-PROC-00000 8	10	setActiveGrpsFunc	0.001728
-PROC-00000 INT Interaction at (rank= 0 ) iter: 0	direct: 5418802	appr: 3015282	avg dir: 833.661865	avg appr: 463.889526
-PROC-00000 APPTIME [0]: Iter: 0	0.000809908 	n: 6500 EventTime: 0.000000  and 0.000000	Sum: 0.000000
-PROC-00000 9	8	Correct	0.095232
-PROC-00000 10	7	Energy	0.080512
-PROC-00000 TIME [00] TOTAL: 1.00126	 Grav: 0.000809908 (GPUgrav 0 , LET Com: 0)	Build: 0.00198197	Domain: 0	 Wait: 0	domUp: 0	domEx: 0	domWait: 0	tPredCor: 0.000440121
-PROC-00000 11	9	Predict	0.077824
-PROC-00000 12	0	Sorting	0.705504
-PROC-00000 13	1	Data-reordering	0.086016
-PROC-00000 14	2	Tree-construction	0.96256
-PROC-00000 15	11	Memory	0.063488
-PROC-00000 16	3	Compute-properties	0.150304
-PROC-00000 17	10	setActiveGrpsFunc	0.001024
-PROC-00000 INT Interaction at (rank= 0 ) iter: 1	direct: 5262186	appr: 3018539	avg dir: 809.567078	avg appr: 464.390625
-PROC-00000 APPTIME [0]: Iter: 1	0.000547886 	n: 6500 EventTime: 0.000000  and 0.000000	Sum: 0.000000
-PROC-00000 18	8	Correct	0.064512
-PROC-00000 19	7	Energy	0.058656
-PROC-00000 TIME [00] TOTAL: 0.00475001	 Grav: 0.000547886 (GPUgrav 0 , LET Com: 0)	Build: 0.00207496	Domain: 0	 Wait: 0	domUp: 0	domEx: 0	domWait: 0	tPredCor: 0.000340223
-PROC-00000 20	9	Predict	0.067424
-PROC-00000 21	0	Sorting	0.658752
-PROC-00000 22	1	Data-reordering	0.101376
-PROC-00000 23	2	Tree-construction	1.1264
-PROC-00000 24	11	Memory	0.001024
-PROC-00000 25	3	Compute-properties	0.143008
-PROC-00000 26	10	setActiveGrpsFunc	0.001856
-PROC-00000 INT Interaction at (rank= 0 ) iter: 2	direct: 5215354	appr: 3003166	avg dir: 802.362183	avg appr: 462.025543
-PROC-00000 APPTIME [0]: Iter: 2	0.00059104 	n: 6500 EventTime: 0.000000  and 0.000000	Sum: 0.000000
-PROC-00000 27	8	Correct	0.062464
-PROC-00000 28	7	Energy	0.058368
-PROC-00000 TIME [00] TOTAL: 0.00496411	 Grav: 0.00059104 (GPUgrav 0 , LET Com: 0)	Build: 0.00212693	Domain: 0	 Wait: 0	domUp: 0	domEx: 0	domWait: 0	tPredCor: 0.000247002
-PROC-00000 29	9	Predict	0.073728
-PROC-00000 30	0	Sorting	0.676864
-PROC-00000 31	1	Data-reordering	0.07168
-PROC-00000 32	2	Tree-construction	1.24326
-PROC-00000 33	11	Memory	0.001888
-PROC-00000 34	3	Compute-properties	0.285824
-PROC-00000 35	10	setActiveGrpsFunc	0.000992
-PROC-00000 INT Interaction at (rank= 0 ) iter: 3	direct: 5265751	appr: 3022854	avg dir: 810.115540	avg appr: 465.054474
-PROC-00000 APPTIME [0]: Iter: 3	0.000599146 	n: 6500 EventTime: 0.000000  and 0.000000	Sum: 0.000000
-PROC-00000 36	8	Correct	0.221024
-PROC-00000 37	7	Energy	0.154528
-PROC-00000 TIME [00] TOTAL: 0.00544214	 Grav: 0.000599146 (GPUgrav 0 , LET Com: 0)	Build: 0.00238395	Domain: 0	 Wait: 0	domUp: 0	domEx: 0	domWait: 0	tPredCor: 0.000528336
-PROC-00000 38	9	Predict	0.095232
-PROC-00000 39	0	Sorting	0.736032
-PROC-00000 40	1	Data-reordering	0.10752
-PROC-00000 41	2	Tree-construction	1.25232
-PROC-00000 42	11	Memory	0.001024
-PROC-00000 43	3	Compute-properties	0.211744
-PROC-00000 44	10	setActiveGrpsFunc	0.002048
-PROC-00000 INT Interaction at (rank= 0 ) iter: 4	direct: 5210410	appr: 3011368	avg dir: 801.601562	avg appr: 463.287384
-PROC-00000 APPTIME [0]: Iter: 4	0.000580072 	n: 6500 EventTime: 0.000000  and 0.000000	Sum: 0.000000
-PROC-00000 45	8	Correct	0.082944
-PROC-00000 46	7	Energy	0.09216
-PROC-00000 TIME [00] TOTAL: 0.00651884	 Grav: 0.000580072 (GPUgrav 0 , LET Com: 0)	Build: 0.00243187	Domain: 0	 Wait: 0	domUp: 0	domEx: 0	domWait: 0	tPredCor: 0.000357151
-PROC-00000 Finished total took: 22.6006
+PROC-00000 0	0	Sorting	0.738336
+PROC-00000 1	1	Data-reordering	0.280576
+PROC-00000 2	9	Predict	0.040672
+PROC-00000 3	4	Direct_gravity	0.523424
+PROC-00000 INT Interaction at (rank= 0 ) iter: 0	direct: 0	appr: 0	avg dir: 0.000000	avg appr: 0.000000
+PROC-00000 APPTIME [0]: Iter: 0	1.68823e+09 	n: 6500 EventTime: 0.000000  and 0.000000	Sum: 0.000000
+PROC-00000 4	8	Correct	0.09216
+PROC-00000 5	7	Energy	0.076512
+PROC-00000 TIME [00] TOTAL: 4.55065	 Grav: 1.68823e+09 (GPUgrav 0 , LET Com: 0)	Build: 0	Domain: 0	 Wait: 0	domUp: 0	domEx: 0	domWait: 0	tPredCor: 0.000272989
+PROC-00000 6	9	Predict	0.009216
+PROC-00000 7	4	Direct_gravity	0.525536
+PROC-00000 INT Interaction at (rank= 0 ) iter: 1	direct: 0	appr: 0	avg dir: 0.000000	avg appr: 0.000000
+PROC-00000 APPTIME [0]: Iter: 1	1.68823e+09 	n: 6500 EventTime: 0.000000  and 0.000000	Sum: 0.000000
+PROC-00000 8	8	Correct	0.104448
+PROC-00000 9	7	Energy	0.063488
+PROC-00000 TIME [00] TOTAL: 2.21729	 Grav: 1.68823e+09 (GPUgrav 0 , LET Com: 0)	Build: 0	Domain: 0	 Wait: 0	domUp: 0	domEx: 0	domWait: 0	tPredCor: 0.000303984
+PROC-00000 10	9	Predict	0.008416
+PROC-00000 11	4	Direct_gravity	0.524512
+PROC-00000 INT Interaction at (rank= 0 ) iter: 2	direct: 0	appr: 0	avg dir: 0.000000	avg appr: 0.000000
+PROC-00000 APPTIME [0]: Iter: 2	1.68823e+09 	n: 6500 EventTime: 0.000000  and 0.000000	Sum: 0.000000
+PROC-00000 12	8	Correct	0.093376
+PROC-00000 13	7	Energy	0.064512
+PROC-00000 TIME [00] TOTAL: 1.07068	 Grav: 1.68823e+09 (GPUgrav 0 , LET Com: 0)	Build: 0	Domain: 0	 Wait: 0	domUp: 0	domEx: 0	domWait: 0	tPredCor: 0.000286102
+PROC-00000 14	9	Predict	0.017408
+PROC-00000 15	4	Direct_gravity	0.523168
+PROC-00000 INT Interaction at (rank= 0 ) iter: 3	direct: 0	appr: 0	avg dir: 0.000000	avg appr: 0.000000
+PROC-00000 APPTIME [0]: Iter: 3	1.68823e+09 	n: 6500 EventTime: 0.000000  and 0.000000	Sum: 0.000000
+PROC-00000 16	8	Correct	0.081024
+PROC-00000 17	7	Energy	0.060416
+PROC-00000 TIME [00] TOTAL: 0.744889	 Grav: 1.68823e+09 (GPUgrav 0 , LET Com: 0)	Build: 0	Domain: 0	 Wait: 0	domUp: 0	domEx: 0	domWait: 0	tPredCor: 0.0003829
+PROC-00000 18	9	Predict	0.009216
+PROC-00000 19	4	Direct_gravity	0.52144
+PROC-00000 INT Interaction at (rank= 0 ) iter: 4	direct: 0	appr: 0	avg dir: 0.000000	avg appr: 0.000000
+PROC-00000 APPTIME [0]: Iter: 4	1.68823e+09 	n: 6500 EventTime: 0.000000  and 0.000000	Sum: 0.000000
+PROC-00000 20	8	Correct	0.08704
+PROC-00000 21	7	Energy	0.067584
+PROC-00000 TIME [00] TOTAL: 3.60546	 Grav: 1.68823e+09 (GPUgrav 0 , LET Com: 0)	Build: 0	Domain: 0	 Wait: 0	domUp: 0	domEx: 0	domWait: 0	tPredCor: 0.000283003
+PROC-00000 Finished total took: 12.4885

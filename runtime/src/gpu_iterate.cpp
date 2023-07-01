@@ -468,10 +468,37 @@ void octree::iterate(bool amuse) {
   if(!amuse) iterate_setup();
   idata.startTime = get_time();
 
-
+  long long int it = 0;
   while(true)
   {
+    // testing for null accels?
+    tree_structure &tree = this->localTree;
+    tree.bodies_ids.d2h();
+    tree.bodies_pos.d2h();
+    tree.bodies_vel.d2h();
+    tree.bodies_acc0.d2h();
+    tree.bodies_acc1.d2h();
+
+    for (int i = 0; i < tree.n; i++) {
+      float4 vel = tree.bodies_vel[i];
+      if(i == 0 || i == 4889 ) // tree.bodies_acc0[i].x == 0 || 
+      {
+        printf("it:%d | %d\tid: %llu\tAcc: %f %f %f %f\tPx: %f\tVx: %f\tkin: %f\tpot: %f\n", 
+            it, i, tree.bodies_ids[i],
+            tree.bodies_acc0[i].x, tree.bodies_acc0[i].y, tree.bodies_acc0[i].z,
+            tree.bodies_acc0[i].w, tree.bodies_pos[i].x, tree.bodies_vel[i].x);
+        printf("it:%d | %d\tid: %llu\tAcc: %f %f %f %f\tPx: %f\tVx: %f\tkin: %f\tpot: %f\n", 
+            it, i, tree.bodies_ids[i],
+            tree.bodies_acc1[i].x, tree.bodies_acc1[i].y, tree.bodies_acc1[i].z,
+            tree.bodies_acc1[i].w, tree.bodies_pos[i].x, tree.bodies_vel[i].x);
+      }
+    }
+
     bool stopRun = iterate_once(idata);
+
+
+    it++;
+    //
 
     double totalTime = get_time() - idata.startTime;
 
