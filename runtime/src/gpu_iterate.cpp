@@ -495,8 +495,6 @@ void octree::iterate(bool amuse) {
     }
 
     bool stopRun = iterate_once(idata);
-
-
     it++;
     //
 
