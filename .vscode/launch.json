@@ -5,19 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name":"(gdb) Launch",
+            "name":"(gdb) Launch Plummer",
             "type": "cppdbg",
+            // "type": "cuda-gdb",
             "request": "launch",
             // Resolved by CMake Tools:
             "program": "${command:cmake.launchTargetPath}",
-            // "args": [
-            //     "--direct",
-            //     "--plummer", "650000", "--snapname", "data/plummer_snap_mpi", 
-            //     "--snapiter", "0.0625", "-T", "0.25", "-dt", "0.0625", "--eps", "0.05"            ],
             "args": [
                 "--direct",
-                "--plummer", "6500", "--snapname", "data/plummer_snap_mpi", 
-                "--snapiter", "0.0625", "-T", "0.25", "-dt", "0.0625", "--eps", "0"            ],
+                "--plummer", "650000", "--snapname", "data/plummer_snap_mpi", 
+                "--snapiter", "0.0625", "-T", "0.25", "-dt", "0.0625", "--eps", "0.05"            ],
+            // "args": "-direct --plummer 6500",
+            // "args": [
+            //     "--direct",
+            //     "--plummer", "6500", "--snapname", "data/plummer_snap_mpi", 
+            //     "--snapiter", "0.0625", "-T", "0.25", "-dt", "0.0625", "--eps", "0"            ],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [

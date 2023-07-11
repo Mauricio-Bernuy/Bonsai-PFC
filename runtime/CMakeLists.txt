@@ -1,6 +1,6 @@
 
 
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 
@@ -11,7 +11,7 @@ option(CUDA_VERBOSE_PTXAS
   
 option(CUDA_DEVICE_DEBUGGING
   "On to enable debugging device code."
-  OFF
+  ON
   )  
 
 option(USE_MPI

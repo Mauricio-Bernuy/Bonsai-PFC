@@ -430,11 +430,6 @@ void octree::export_accel_vals() {
       accelData << tree.bodies_acc0[i].y << " ";
       accelData << tree.bodies_acc0[i].z << " ";
       accelData << tree.bodies_acc0[i].w << "\n";
-
-      // printf("%d\tid: %llu\tAcc: %f %f %f %f\tPx: %f\tVx: %f\tkin: %f\tpot: %f\n", 
-      //     i,tree.bodies_ids[i],
-      //     tree.bodies_acc0[i].x, tree.bodies_acc0[i].y, tree.bodies_acc0[i].z,
-      //     tree.bodies_acc0[i].w, tree.bodies_pos[i].x, tree.bodies_vel[i].x);
     }
   }
   accelData.close();

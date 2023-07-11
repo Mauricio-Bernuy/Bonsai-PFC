@@ -730,6 +730,7 @@ public:
     quickSync(_quickSync), useMPIIO(_useMPIIO), mpiRenderMode(_mpiRenderMode), nextQuickDump(0.0), sharedPID(shrdpid)
   {
     iter            = 0;
+    // t_current       = t_previous = 0;
     if (getUseDirectGravity()){
       t_previous    = -1;
       t_current     = 0;
