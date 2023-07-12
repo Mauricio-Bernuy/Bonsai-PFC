@@ -11,7 +11,7 @@ option(CUDA_VERBOSE_PTXAS
   
 option(CUDA_DEVICE_DEBUGGING
   "On to enable debugging device code."
-  ON
+  OFF
   )  
 
 option(USE_MPI
